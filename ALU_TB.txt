@@ -1,0 +1,45 @@
+module ALU_TB()
+
+reg[3:0] select,A,B;
+reg Carry_in;
+reg enable;
+wire[15:0] out;
+
+parameter sim_time = 1500;
+
+ALU ALU_TB(
+input enable,
+input [3:0] A, B, 
+input Carry_in,
+input [3:0] select,
+output [3:0] adder_Out,
+output [1:0] comparator_Out,
+output Cout, 
+output [3:0] G, 
+output [3:0] bitwise_and_out,
+output anding_out,
+output [3:0] bitwise_or_out,
+output [3:0] complementer_out,
+output incrementer_C_out, 
+output [3:0] incrementer_S,
+output [3:0] decrementer_out,
+output parity_gen_out,
+output oring_out
+    );
+initial #sim_time $finish;
+intial
+begin
+
+enable = 1'b0;
+select = 4'b0000;
+
+repeat(16) #10
+     begin
+     enable = 1'b1;
+       #50 $display( "select is %b /t out is %b " , select , out);
+       select = select + 4'b0001;
+     end
+end
+  
+endmodule
+     
